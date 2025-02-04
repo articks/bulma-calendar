@@ -1,7 +1,7 @@
 @use "sass:list";
 
 @use "bulma/sass/utilities" as bulma;
-@use "bulma/sass/form/shared";
+@use "bulma/sass/form/shared" as form;
 
 @use "timepicker.scss";
 
@@ -771,7 +771,7 @@ $calendar-date-padding: 0.1rem 0 !default;
   }
 
   .datetimepicker-dummy-wrapper {
-    box-shadow: bulma.$input-shadow;
+    box-shadow: form.$input-shadow;
     cursor: pointer;
     display: flex;
     flex: 1 100%;
@@ -847,7 +847,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         &:active,
         &.is-active {
           border-color: $color;
-          box-shadow: bulma.$input-shadow;
+          box-shadow: form.$input-shadow;
         }
       }
 
