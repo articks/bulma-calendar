@@ -1,5 +1,7 @@
 @import "bulma/sass/utilities/index";
 @import "bulma/sass/form/shared";
+@use "bulma/sass/utilities/index";
+@use "bulma/sass/form/shared";
 
 $calendar-border: 0.1rem solid $white-ter !default;
 $calendar-border-radius: $radius-small !default;
@@ -21,6 +23,7 @@ $calendar-selection-nav-padding: 0.5em !default;
 $calendar-date-padding: 0.1rem 0 !default;
 
 @import "timepicker.scss";
+@use "timepicker.scss";
 
 @mixin datetimepicker-header {
   .datetimepicker-header {
