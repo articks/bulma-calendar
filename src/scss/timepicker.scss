@@ -1,3 +1,5 @@
+@use "sass:list";
+
 @mixin timepicker {
   .timepicker {
     display: flex;
@@ -135,11 +137,11 @@
     }
   }
   @each $name, $pair in $colors {
-    $color: nth($pair, 1);
+    $color: list.nth($pair, 1);
     $color-invert: null;
 
-    @if length($pair) > 1 {
-      $color-invert: nth($pair, 2);
+    @if list.length($pair) > 1 {
+      $color-invert: list.nth($pair, 2);
     }
     &.is-#{$name} {
       .timepicker-input,

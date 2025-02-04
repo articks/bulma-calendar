@@ -1,5 +1,5 @@
-@import "bulma/sass/utilities/index";
-@import "bulma/sass/form/shared";
+@use "sass:list";
+
 @use "bulma/sass/utilities/index";
 @use "bulma/sass/form/shared";
 
@@ -22,7 +22,6 @@ $calendar-selection-padding: 0.3rem 0 !default;
 $calendar-selection-nav-padding: 0.5em !default;
 $calendar-date-padding: 0.1rem 0 !default;
 
-@import "timepicker.scss";
 @use "timepicker.scss";
 
 @mixin datetimepicker-header {
@@ -575,10 +574,10 @@ $calendar-date-padding: 0.1rem 0 !default;
       white-space: nowrap;
 
       @each $name, $pair in $colors {
-        $color: nth($pair, 1);
+        $color: list.nth($pair, 1);
         $color-invert: null;
-        @if length($pair) > 1 {
-          $color-invert: nth($pair, 2);
+        @if list.length($pair) > 1 {
+          $color-invert: list.nth($pair, 2);
         }
 
         &.is-#{$name} {
@@ -603,11 +602,11 @@ $calendar-date-padding: 0.1rem 0 !default;
   @include timepicker;
 
   @each $name, $pair in $colors {
-    $color: nth($pair, 1);
+    $color: list.nth($pair, 1);
     $color-invert: null;
 
-    @if length($pair) > 1 {
-      $color-invert: nth($pair, 2);
+    @if list.length($pair) > 1 {
+      $color-invert: list.nth($pair, 2);
     }
 
     &.is-#{$name} {
@@ -828,7 +827,7 @@ $calendar-date-padding: 0.1rem 0 !default;
 
 .datetimepicker-dummy {
   @each $name, $pair in $colors {
-    $color: nth($pair, 1);
+    $color: list.nth($pair, 1);
     $color-invert: bulmaFindColorInvert($color);
 
     &.is-#{$name} {
