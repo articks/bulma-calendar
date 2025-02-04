@@ -1,5 +1,7 @@
 @use "sass:list";
 
+@use "bulma/sass/utilities" as bulma;
+
 @mixin timepicker {
   .timepicker {
     display: flex;
@@ -25,11 +27,11 @@
 
         .timepicker-input {
           position: relative;
-          color: $primary;
+          color: bulma.$primary;
           text-align: center;
           overflow: hidden;
           font-size: 2rem;
-          font-weight: $weight-normal;
+          font-weight: bulma.$weight-normal;
 
           &.is-input {
             .timepicker-input-number {
@@ -104,7 +106,7 @@
         transform: translateY(-50%);
         height: 50%;
         width: 0.1rem;
-        background-color: $white-ter;
+        background-color: bulma.$white-ter;
       }
     }
     .timepicker-previous,
@@ -122,7 +124,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: $white-ter;
+        background-color: bulma.$white-ter;
       }
     }
     .timepicker-previous {
@@ -133,10 +135,10 @@
       justify-content: center;
       align-items: center;
       font-size: 1.5rem;
-      color: $primary;
+      color: bulma.$primary;
     }
   }
-  @each $name, $pair in $colors {
+  @each $name, $pair in bulma.$colors {
     $color: list.nth($pair, 1);
     $color-invert: null;
 
@@ -151,7 +153,7 @@
       }
     }
   }
-  @each $name, $value in $shades {
+  @each $name, $value in bulma.$shades {
     $color: $value;
     $color-invert: bulmaFindColorInvert($color);
     &.is-#{$name} {
