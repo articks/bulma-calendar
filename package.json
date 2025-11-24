@@ -36,9 +36,7 @@
   },
   "homepage": "https://doc.mh-s.de/bulma-calendar",
   "dependencies": {
-    "@babel/preset-env": "^7.25.4",
-    "date-fns": "^2.21.3",
-    "mkdirp": "^3.0.1"
+    "date-fns": "^4.1.0"
   },
   "peerDependencies": {
     "bulma": "^1.0.2"
