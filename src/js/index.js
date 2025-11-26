@@ -1,6 +1,7 @@
 import * as utils from './utils/index';
 import * as type from './utils/type';
 import * as dateFns from 'date-fns';
+import * as locale from 'date-fns/locale';
 import EventEmitter from './utils/events';
 
 import datePicker from './datePicker';
@@ -124,10 +125,10 @@ export default class bulmaCalendar extends EventEmitter {
     // Set language
     set lang(lang) {
         try {
-            this._locale = require(`date-fns/locale/${lang}/index.js`);
+            this._locale = locale[lang];
         } catch (e) {
             lang         = 'en-US';
-            this._locale = require(`date-fns/locale/${lang}/index.js`);
+            this._locale = locale[lang];
         } finally {
             this._lang           = lang;
             this.datePicker.lang = lang;
