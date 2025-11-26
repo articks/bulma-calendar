@@ -1,6 +1,5 @@
 var stream = require('event-stream');
 var gutil = require('gulp-util');
-var mkdirp = require('mkdirp');
 var path = require('path');
 var fs = require('fs');
 var url = require('url');
@@ -69,7 +68,7 @@ module.exports = function(options) {
       }
 
       try {
-        mkdirp.sync(path.dirname(dest_file));
+        fs.mkdirSync(path.dirname(dest_file), { recursive: true });
         fs.createReadStream(path.resolve(options.dependenciesPath, readPath)).pipe(fs.createWriteStream(dest_file));
       } catch (err) {
         return done(new gutil.PluginError(PLUGIN_NAME, err));
