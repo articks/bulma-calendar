@@ -14,7 +14,7 @@ import postcss from 'gulp-postcss';
 import terser from 'gulp-terser';
 import cleanCSS from 'gulp-clean-css';
 import gulpSass from 'gulp-sass';
-import dartSass from 'sass-embedded';
+import * as dartSass from 'sass-embedded';
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 const browserSync = browserSyncModule.create();
