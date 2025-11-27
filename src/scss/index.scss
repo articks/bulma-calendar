@@ -3,7 +3,7 @@
 @use "bulma/sass/utilities" as bulma;
 @use "bulma/sass/form/shared" as form;
 
-@use "timepicker.scss";
+@use "timepicker";
 
 $calendar-border: 0.1rem solid bulma.$white-ter !default;
 $calendar-border-radius: bulma.$radius-small !default;
