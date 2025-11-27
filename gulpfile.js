@@ -1,26 +1,23 @@
-const pkg = require('./package.json');
-const gulp = require('gulp');
-const webpack = require('webpack');
-const webpackStream = require('webpack-stream');
+import { readFileSync } from 'fs';
+import gulp from 'gulp';
+import webpackStream from 'webpack-stream';
+import autoprefixer from 'autoprefixer';
+import browserSyncModule from 'browser-sync';
+import camelCase from 'camelcase';
+import colors from 'ansi-colors';
+import concat from 'gulp-concat';
+import { deleteAsync } from 'del';
+import dependencies from './dependencies-injector.js';
+import fs from 'fs';
+import log from 'fancy-log';
+import postcss from 'gulp-postcss';
+import terser from 'gulp-terser';
+import cleanCSS from 'gulp-clean-css';
+import gulpSass from 'gulp-sass';
+import dartSass from 'sass-embedded';
 
-const autoprefixer = require('autoprefixer');
-const browserSync = require('browser-sync').create();
-const camelCase = require('camelcase');
-const cleancss = require('gulp-clean-css');
-const colors = require('ansi-colors');
-const concat = require('gulp-concat');
-const del = require('del');
-const dependencies = require('./dependencies-injector');
-const fs = require('fs');
-const log = require('fancy-log');
-const nop = require('gulp-nop');
-const postcss = require('gulp-postcss');
-const run = require('gulp-run');
-const uglify = require('gulp-uglify');
-const minifycss = require('gulp-minify-css');
-
-const gulpSass = require('gulp-sass');
-const dartSass = require('sass');
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
+const browserSync = browserSyncModule.create();
 const sass = gulpSass(dartSass);
 
 /**
@@ -76,18 +73,12 @@ const config = {
 gulp.task('build:styles', function () {
     if (fs.existsSync(config.sass.source + config.sass.input)) {
         return gulp
-            .src(
-                config.sass.dependencies.concat([
-                    config.sass.source + config.sass.input,
-                ])
-            )
-            .pipe(concat(config.sass.output.filename + '.scss'))
+            .src(config.sass.source + config.sass.input)
             .pipe(
                 sass({
                     style: config.sass.output.format,
                     trace: true,
-                    loadPath: [config.sass.source],
-                    includePaths: ['node_modules', paths.bulma],
+                    loadPaths: ['node_modules'],
                     indentedSyntax: false,
                 })
             )
@@ -106,17 +97,17 @@ gulp.task('build:styles', function () {
             .pipe(concat(config.sass.output.filename + '.css'))
             .pipe(gulp.dest(config.sass.destination))
 
-            .pipe(minifycss())
+            .pipe(cleanCSS())
             .pipe(concat(config.sass.output.filename + '.min.css'))
             .pipe(gulp.dest(config.sass.destination))
             .on('end', () => console.log('Minified CSS file generated'));
     } else {
-        return gulp.src('.').pipe(nop());
+        return Promise.resolve();
     }
 });
 
 gulp.task('clean:styles', function () {
-    return del([
+    return deleteAsync([
         config.sass.destination + config.sass.output.filename + '.css',
         config.sass.destination + config.sass.output.filename + '.min.css',
     ]);
@@ -150,6 +141,9 @@ gulp.task('build:scripts', function () {
                         libraryExport: 'default',
                     },
                     mode: 'production',
+                    resolve: {
+                        extensions: ['.js', '.jsx'],
+                    },
                     module: {
                         rules: [
                             {
@@ -160,13 +154,18 @@ gulp.task('build:scripts', function () {
                                     babelrc: true,
                                 },
                             },
+                            {
+                                test: /\.m?js$/,
+                                resolve: {
+                                    fullySpecified: false,
+                                },
+                            },
                         ],
                     },
                     performance: {
                         hints: false,
                     },
-                }),
-                webpack
+                })
             )
 
             .pipe(concat(config.javascript.output.filename + '.js'))
@@ -174,9 +173,9 @@ gulp.task('build:scripts', function () {
 
             .pipe(concat(config.javascript.output.filename + '.min.js'))
             .pipe(
-                uglify({
+                terser({
                     keep_fnames: true,
-                    ie8: false,
+                    mangle: false,
                 }).on('error', function (err) {
                     log(colors.red('[Error]'), err.toString());
                 })
@@ -187,12 +186,12 @@ gulp.task('build:scripts', function () {
                 })
             );
     } else {
-        return gulp.src('.').pipe(nop());
+        return Promise.resolve();
     }
 });
 
 gulp.task('clean:scripts', function () {
-    return del([
+    return deleteAsync([
         config.javascript.destination + config.javascript.output.filename + '.js',
         config.javascript.destination + config.javascript.output.filename + '.min.js'
     ]);
@@ -212,7 +211,7 @@ gulp.task('copy:scripts', function () {
  */
 
 gulp.task('clean', function () {
-    return del(paths.dist);
+    return deleteAsync(paths.dist);
 });
 
 gulp.task('build', gulp.series('clean', 'build:styles', 'build:scripts', 'copy:styles', 'copy:scripts'));
@@ -246,17 +245,18 @@ gulp.task('default', gulp.series('build', function (done) {
   done();
 }));
 
-gulp.task('build:demo', function () {
+gulp.task('build:demo', async function () {
   browserSync.notify('Compiling Demo');
 
-  var shellCommand = `bundle exec jekyll build --source=${paths.src + paths.demo} --destination=${paths.demo} --config _config.yml`;
-  return gulp.src('.')
-    .pipe(run(shellCommand));
+  const { execa } = await import('execa');
+  await execa('bundle', ['exec', 'jekyll', 'build', `--source=${paths.src + paths.demo}`, `--destination=${paths.demo}`, '--config', '_config.yml'], {
+    stdio: 'inherit'
+  });
 });
 
 gulp.task('clean:demo', function (callback) {
     browserSync.notify('Cleaning Demo');
-    return del(paths.demo);
+    return deleteAsync(paths.demo);
 });
 
 gulp.task('demo:dependencies', gulp.series('build:demo', function () {
@@ -324,7 +324,6 @@ gulp.task('launch:demo', gulp.series('demo:dependencies', function () {
 
   // Watch favicon.png.
   gulp.watch('favicon.png', gulp.series('build:demo:watch'));
-  return gulp.src('.').pipe(nop());
 }));
 
 // Build and Launch Demo site
