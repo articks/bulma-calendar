@@ -1,12 +1,12 @@
 {
-  "name": "bulma-calendar",
+  "name": "bulma-calendar-js",
   "type": "module",
   "browserslist": "> 0.25%, not dead",
   "description": "Display a calendar for date/time selection, in different colors and sizes",
   "main": "dist/js/bulma-calendar.js",
   "style": "dist/css/bulma-calendar.min.css",
   "sass": "src/scss/index.scss",
-  "version": "7.1.1",
+  "version": "7.1.2",
   "scripts": {
     "commit": "git-cz",
     "travis-deploy-once": "travis-deploy-once",
@@ -26,7 +26,9 @@
     "extension",
     "calendar",
     "datepicker",
-    "date picker"
+    "date picker",
+    "bulma calendar",
+    "calendar"
   ],
   "author": "Michael Hack <info@michael-hack.de> (https://www.michael-hack.de)",
   "contributors": [

@@ -13,8 +13,7 @@
 
 .datetimepicker-dummy .datetimepicker-dummy-wrapper {
   align-items: center;
-  -webkit-appearance: none;
-          appearance: none;
+  appearance: none;
   border-color: transparent;
   border-style: solid;
   border-width: var(--bulma-control-border-width);
@@ -339,8 +338,7 @@
 }
 .datetimepicker .datepicker-body .datepicker-dates .datepicker-days .datepicker-date .date-item {
   margin: 0 auto;
-  -webkit-appearance: none;
-          appearance: none;
+  appearance: none;
   background: transparent;
   border: none;
   border-radius: 25091983px;
