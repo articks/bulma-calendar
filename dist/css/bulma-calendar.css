@@ -11,36 +11,9 @@
   --bulma-control-focus-shadow-l: 50%;
 }
 
-:root {
-  --bulma-control-radius: var(--bulma-radius);
-  --bulma-control-radius-small: var(--bulma-radius-small);
-  --bulma-control-border-width: 1px;
-  --bulma-control-height: 2.5em;
-  --bulma-control-line-height: 1.5;
-  --bulma-control-padding-vertical: calc(0.5em - 1px);
-  --bulma-control-padding-horizontal: calc(0.75em - 1px);
-  --bulma-control-size: var(--bulma-size-normal);
-  --bulma-control-focus-shadow-l: 50%;
-}
-
-/* Bulma Utilities */
-/* Bulma Utilities */
-:root {
-  --bulma-control-radius: var(--bulma-radius);
-  --bulma-control-radius-small: var(--bulma-radius-small);
-  --bulma-control-border-width: 1px;
-  --bulma-control-height: 2.5em;
-  --bulma-control-line-height: 1.5;
-  --bulma-control-padding-vertical: calc(0.5em - 1px);
-  --bulma-control-padding-horizontal: calc(0.75em - 1px);
-  --bulma-control-size: var(--bulma-size-normal);
-  --bulma-control-focus-shadow-l: 50%;
-}
-
 .datetimepicker-dummy .datetimepicker-dummy-wrapper {
   align-items: center;
   -webkit-appearance: none;
-     -moz-appearance: none;
           appearance: none;
   border-color: transparent;
   border-style: solid;
@@ -61,11 +34,9 @@
   transition-property: background-color, border-color, box-shadow, color;
   vertical-align: top;
 }
-
 .datetimepicker-dummy .datetimepicker-dummy-wrapper:focus, .datetimepicker-dummy .datetimepicker-dummy-wrapper:focus-visible, .datetimepicker-dummy .datetimepicker-dummy-wrapper:focus-within, .datetimepicker-dummy .is-focused.datetimepicker-dummy-wrapper, .datetimepicker-dummy .datetimepicker-dummy-wrapper:active, .datetimepicker-dummy .is-active.datetimepicker-dummy-wrapper {
   outline: none;
 }
-
 .datetimepicker-dummy [disabled].datetimepicker-dummy-wrapper, fieldset[disabled] .datetimepicker-dummy .datetimepicker-dummy-wrapper, .datetimepicker-dummy fieldset[disabled] .datetimepicker-dummy-wrapper {
   cursor: not-allowed;
 }
@@ -81,6 +52,7 @@
   --bulma-input-border-width: var(--bulma-control-border-width);
   --bulma-input-border-l: var(--bulma-border-l);
   --bulma-input-border-l-delta: 0%;
+  --bulma-input-border-color: hsl(var(--bulma-input-h), var(--bulma-input-s), calc(var(--bulma-input-border-l) + var(--bulma-input-border-l-delta)));
   --bulma-input-hover-border-l-delta: var(--bulma-hover-border-l-delta);
   --bulma-input-active-border-l-delta: var(--bulma-active-border-l-delta);
   --bulma-input-focus-h: var(--bulma-focus-h);
@@ -368,7 +340,6 @@
 .datetimepicker .datepicker-body .datepicker-dates .datepicker-days .datepicker-date .date-item {
   margin: 0 auto;
   -webkit-appearance: none;
-     -moz-appearance: none;
           appearance: none;
   background: transparent;
   border: none;
@@ -759,7 +730,6 @@
   padding: 0.5rem;
   width: 100%;
   -webkit-user-select: none;
-     -moz-user-select: none;
           user-select: none;
 }
 .datetimepicker .timepicker .timepicker-previous:hover,
@@ -1629,7 +1599,7 @@
   height: 100%;
   max-width: 100%;
   background-color: hsl(var(--bulma-input-h), var(--bulma-input-s), calc(var(--bulma-input-background-l) + var(--bulma-input-background-l-delta)));
-  border-color: hsl(var(--bulma-input-h), var(--bulma-input-s), calc(var(--bulma-input-border-l) + var(--bulma-input-border-l-delta)));
+  border-color: var(--bulma-input-border-color);
   border-radius: var(--bulma-input-radius);
   color: hsl(var(--bulma-input-h), var(--bulma-input-s), var(--bulma-input-color-l));
 }

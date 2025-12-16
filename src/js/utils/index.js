@@ -52,6 +52,11 @@ export const newDate = (date, format, fallback = 'yyyy-MM-dd HH:mm') => {
         return new Date(date.getTime());
     }
 
+    // Ensure date is a string before parsing
+    if (!type.isString(date)) {
+        return undefined;
+    }
+
     // Parse Date
     let result = dateFns.parse(date, format, new Date());
 

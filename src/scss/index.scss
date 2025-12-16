@@ -1,26 +1,28 @@
-@import "bulma/sass/utilities/index";
-@import "bulma/sass/form/shared";
+@use "sass:list";
 
-$calendar-border: 0.1rem solid $white-ter !default;
-$calendar-border-radius: $radius-small !default;
-$calendar-selection-background-color: $primary !default;
+@use "bulma/sass/utilities" as bulma;
+@use "bulma/sass/form/shared" as form;
+
+@use "timepicker";
+
+$calendar-border: 0.1rem solid bulma.$white-ter !default;
+$calendar-border-radius: bulma.$radius-small !default;
+$calendar-selection-background-color: bulma.$primary !default;
 $calendar-days-background-color: transparent !default;
-$calendar-selection-days-color: $grey-light !default;
-$calendar-date-color: $text !default;
-$calendar-date-hover-background-color: $white !default;
-$calendar-date-hover-border: 0.1rem solid $primary !default;
-$calendar-date-hover-border: $primary !default;
-$calendar-date-highlighted-border: 0.1rem solid $primary !default;
+$calendar-selection-days-color: bulma.$grey-light !default;
+$calendar-date-color: bulma.$text !default;
+$calendar-date-hover-background-color: bulma.$white !default;
+$calendar-date-hover-border: 0.1rem solid bulma.$primary !default;
+$calendar-date-hover-border: bulma.$primary !default;
+$calendar-date-highlighted-border: 0.1rem solid bulma.$primary !default;
 $calendar-today-background: transparent !default;
-$calendar-today-border: 0.1rem dotted $primary !default;
-$calendar-today-color: $primary !default;
-$calendar-range-background-color: $primary !default;
+$calendar-today-border: 0.1rem dotted bulma.$primary !default;
+$calendar-today-color: bulma.$primary !default;
+$calendar-range-background-color: bulma.$primary !default;
 $calendar-body-padding: 0 !default;
 $calendar-selection-padding: 0.3rem 0 !default;
 $calendar-selection-nav-padding: 0.5em !default;
 $calendar-date-padding: 0.1rem 0 !default;
-
-@import "timepicker.scss";
 
 @mixin datetimepicker-header {
   .datetimepicker-header {
@@ -50,7 +52,7 @@ $calendar-date-padding: 0.1rem 0 !default;
     .datetimepicker-selection-from,
     .datetimepicker-selection-to {
       font-size: 0.65rem;
-      color: $grey-light;
+      color: bulma.$grey-light;
       text-transform: uppercase;
       padding: 0;
     }
@@ -75,7 +77,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         font-size: 2rem;
         line-height: 2.5rem;
         margin-right: 0.5rem;
-        color: $primary;
+        color: bulma.$primary;
         font-weight: 100;
       }
 
@@ -89,7 +91,7 @@ $calendar-date-padding: 0.1rem 0 !default;
       }
 
       .datetimepicker-selection-month {
-        color: $text;
+        color: bulma.$text;
         text-transform: capitalize;
       }
 
@@ -153,7 +155,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         justify-content: center;
         align-items: center;
         padding: 0 1rem;
-        color: $grey-light;
+        color: bulma.$grey-light;
       }
     }
   }
@@ -162,7 +164,7 @@ $calendar-date-padding: 0.1rem 0 !default;
 @mixin datepicker-nav {
   .datepicker-nav {
     background: $calendar-selection-background-color;
-    color: bulmaFindColorInvert($calendar-selection-background-color);
+    color: bulma.bulmaFindColorInvert($calendar-selection-background-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -177,8 +179,8 @@ $calendar-date-padding: 0.1rem 0 !default;
     .datepicker-nav-month,
     .datepicker-nav-year {
       text-decoration: none;
-      font-size: $size-6;
-      color: bulmaFindColorInvert($primary);
+      font-size: bulma.$size-6;
+      color: bulma.bulmaFindColorInvert(bulma.$primary);
 
       &:hover {
         cursor: pointer;
@@ -190,7 +192,7 @@ $calendar-date-padding: 0.1rem 0 !default;
     }
 
     .datepicker-nav-year {
-      font-weight: $weight-bold;
+      font-weight: bulma.$weight-bold;
     }
 
     .datepicker-nav-previous,
@@ -199,7 +201,7 @@ $calendar-date-padding: 0.1rem 0 !default;
       flex-grow: 0;
       flex-shrink: 0;
       text-decoration: none;
-      color: $white;
+      color: bulma.$white;
 
       &:hover {
         background-color: transparent;
@@ -250,8 +252,8 @@ $calendar-date-padding: 0.1rem 0 !default;
       justify-content: space-around;
       padding: $calendar-selection-padding;
       background: $calendar-days-background-color;
-      color: bulmaFindColorInvert($calendar-days-background-color);
-      font-size: $size-7;
+      color: bulma.bulmaFindColorInvert($calendar-days-background-color);
+      font-size: bulma.$size-7;
 
       .datepicker-date {
         background: $calendar-days-background-color !important;
@@ -267,7 +269,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         flex-wrap: wrap;
         justify-content: space-around;
         padding: $calendar-body-padding;
-        color: $grey;
+        color: bulma.$grey;
 
         .datepicker-date {
           background: #f5f5f5;
@@ -309,19 +311,19 @@ $calendar-date-padding: 0.1rem 0 !default;
             &:focus {
               background: $calendar-date-hover-background-color;
               border-color: $calendar-date-hover-background-color;
-              color: bulmaFindColorInvert($calendar-date-hover-background-color);
+              color: bulma.bulmaFindColorInvert($calendar-date-hover-background-color);
               text-decoration: none;
             }
 
             &.is-active {
-              background: $primary;
-              border-color: $primary;
+              background: bulma.$primary;
+              border-color: bulma.$primary;
               border-radius: 25091983px;
-              color: bulmaFindColorInvert($primary);
+              color: bulma.bulmaFindColorInvert(bulma.$primary);
 
               &.is-today {
-                border-color: bulmaFindColorInvert($primary) !important;
-                color: bulmaFindColorInvert($primary) !important;
+                border-color: bulma.bulmaFindColorInvert(bulma.$primary) !important;
+                color: bulma.bulmaFindColorInvert(bulma.$primary) !important;
               }
             }
 
@@ -332,7 +334,7 @@ $calendar-date-padding: 0.1rem 0 !default;
             &:hover {
               background: $calendar-date-hover-background-color;
               border: $calendar-date-hover-border;
-              color: bulmaFindColorInvert($calendar-date-hover-background-color);
+              color: bulma.bulmaFindColorInvert($calendar-date-hover-background-color);
               text-decoration: none;
             }
           }
@@ -343,7 +345,7 @@ $calendar-date-padding: 0.1rem 0 !default;
 
           &.is-disabled,
           &[disabled] {
-            background-color: $white-ter;
+            background-color: bulma.$white-ter;
             background-image: url(data:image/gif;base64,R0lGODlhBQAFAOMAAP/14////93uHt3uHt3uHt3uHv///////////wAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAFAAUAAAQL0ACAzpG0YnonNxEAOw==) !important;
 
             .date-item,
@@ -362,9 +364,9 @@ $calendar-date-padding: 0.1rem 0 !default;
             &.datepicker-range-start,
             &.datepicker-range-end {
               .date-item {
-                background: bulmaFindColorInvert($primary);
-                border: 0.1rem solid $primary;
-                color: $primary;
+                background: bulma.bulmaFindColorInvert(bulma.$primary);
+                border: 0.1rem solid bulma.$primary;
+                color: bulma.$primary;
                 box-shadow: 0 0.2rem 0.2rem rgba(10, 10, 10, 0.1);
               }
             }
@@ -380,12 +382,12 @@ $calendar-date-padding: 0.1rem 0 !default;
             }
 
             .date-item {
-              background-color: $primary;
-              color: bulmaFindColorInvert($primary);
+              background-color: bulma.$primary;
+              color: bulma.bulmaFindColorInvert(bulma.$primary);
 
               &.is-today {
-                border-color: bulmaFindColorInvert($primary) !important;
-                color: bulmaFindColorInvert($primary) !important;
+                border-color: bulma.bulmaFindColorInvert(bulma.$primary) !important;
+                color: bulma.bulmaFindColorInvert(bulma.$primary) !important;
               }
             }
           }
@@ -393,7 +395,7 @@ $calendar-date-padding: 0.1rem 0 !default;
           &.datepicker-range-start.datepicker-range-end {
             .date-item {
               &.is-today {
-                color: $primary !important;
+                color: bulma.$primary !important;
               }
             }
           }
@@ -418,7 +420,7 @@ $calendar-date-padding: 0.1rem 0 !default;
       .datepicker-year {
         padding: 0.5rem;
         margin: 0.5rem;
-        font-size: $size-7;
+        font-size: bulma.$size-7;
         text-align: center;
         flex: 1 25%;
         text-transform: capitalize;
@@ -426,16 +428,16 @@ $calendar-date-padding: 0.1rem 0 !default;
         border: 0.1rem solid transparent;
 
         &.is-active {
-          background: $primary;
-          border-color: $primary;
-          color: bulmaFindColorInvert($primary);
+          background: bulma.$primary;
+          border-color: bulma.$primary;
+          color: bulma.bulmaFindColorInvert(bulma.$primary);
         }
 
         &:hover {
           cursor: pointer;
           background: $calendar-date-hover-background-color;
           border: $calendar-date-hover-border;
-          color: bulmaFindColorInvert($calendar-date-hover-background-color);
+          color: bulma.bulmaFindColorInvert($calendar-date-hover-background-color);
         }
       }
     }
@@ -457,7 +459,7 @@ $calendar-date-padding: 0.1rem 0 !default;
 
 @mixin datetimepicker {
   & {
-    background: $white;
+    background: bulma.$white;
     border-radius: $calendar-border-radius;
     max-width: 320px;
     z-index: 1;
@@ -558,9 +560,9 @@ $calendar-date-padding: 0.1rem 0 !default;
     }
 
     .datepicker-event {
-      background-color: $grey;
-      border-radius: $radius-small;
-      color: $white;
+      background-color: bulma.$grey;
+      border-radius: bulma.$radius-small;
+      color: bulma.$white;
       display: block;
       font-size: 1rem;
       margin: 0.2rem auto;
@@ -571,11 +573,11 @@ $calendar-date-padding: 0.1rem 0 !default;
       vertical-align: baseline;
       white-space: nowrap;
 
-      @each $name, $pair in $colors {
-        $color: nth($pair, 1);
+      @each $name, $pair in bulma.$colors {
+        $color: list.nth($pair, 1);
         $color-invert: null;
-        @if length($pair) > 1 {
-          $color-invert: nth($pair, 2);
+        @if list.length($pair) > 1 {
+          $color-invert: list.nth($pair, 2);
         }
 
         &.is-#{$name} {
@@ -597,14 +599,14 @@ $calendar-date-padding: 0.1rem 0 !default;
   }
 
   @include datetimepicker;
-  @include timepicker;
+  @include timepicker.timepicker;
 
-  @each $name, $pair in $colors {
-    $color: nth($pair, 1);
+  @each $name, $pair in bulma.$colors {
+    $color: list.nth($pair, 1);
     $color-invert: null;
 
-    @if length($pair) > 1 {
-      $color-invert: nth($pair, 2);
+    @if list.length($pair) > 1 {
+      $color-invert: list.nth($pair, 2);
     }
 
     &.is-#{$name} {
@@ -662,7 +664,7 @@ $calendar-date-padding: 0.1rem 0 !default;
                   .date-item {
                     background: $color-invert;
                     border-color: $color;
-                    color: bulmaFindColorInvert($color-invert);
+                    color: bulma.bulmaFindColorInvert($color-invert);
                   }
                 }
               }
@@ -673,9 +675,9 @@ $calendar-date-padding: 0.1rem 0 !default;
     }
   }
 
-  @each $name, $value in $shades {
+  @each $name, $value in bulma.$shades {
     $color: $value;
-    $color-invert: bulmaFindColorInvert($color);
+    $color-invert: bulma.bulmaFindColorInvert($color);
 
     &.is-#{$name} {
       .datetimepicker-header {
@@ -753,9 +755,9 @@ $calendar-date-padding: 0.1rem 0 !default;
   .datetimepicker-clear-button {
     background: transparent;
     border: 0;
-    color: $primary;
+    color: bulma.$primary;
     cursor: pointer;
-    font-weight: $weight-normal;
+    font-weight: bulma.$weight-normal;
     outline: 0;
     transform: rotate(45deg);
     font-size: 1.5rem;
@@ -769,7 +771,7 @@ $calendar-date-padding: 0.1rem 0 !default;
   }
 
   .datetimepicker-dummy-wrapper {
-    box-shadow: $input-shadow;
+    box-shadow: form.$input-shadow;
     cursor: pointer;
     display: flex;
     flex: 1 100%;
@@ -777,7 +779,7 @@ $calendar-date-padding: 0.1rem 0 !default;
     height: 100%;
     max-width: 100%;
 
-    @include input;
+    @include form.input;
     &[readonly] {
       box-shadow: none;
     }
@@ -795,7 +797,7 @@ $calendar-date-padding: 0.1rem 0 !default;
     }
 
     .datetimepicker-dummy-input {
-      color: $text;
+      color: bulma.$text;
       font-size: 1rem;
       text-align: left;
       text-indent: 1rem;
@@ -824,9 +826,9 @@ $calendar-date-padding: 0.1rem 0 !default;
 }
 
 .datetimepicker-dummy {
-  @each $name, $pair in $colors {
-    $color: nth($pair, 1);
-    $color-invert: bulmaFindColorInvert($color);
+  @each $name, $pair in bulma.$colors {
+    $color: list.nth($pair, 1);
+    $color-invert: bulma.bulmaFindColorInvert($color);
 
     &.is-#{$name} {
       &:before,
@@ -845,7 +847,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         &:active,
         &.is-active {
           border-color: $color;
-          box-shadow: $input-shadow;
+          box-shadow: form.$input-shadow;
         }
       }
 
@@ -855,9 +857,9 @@ $calendar-date-padding: 0.1rem 0 !default;
     }
   }
 
-  @each $name, $value in $shades {
+  @each $name, $value in bulma.$shades {
     $color: $value;
-    $color-invert: bulmaFindColorInvert($color);
+    $color-invert: bulma.bulmaFindColorInvert($color);
 
     &.is-#{$name} {
       &:before,
